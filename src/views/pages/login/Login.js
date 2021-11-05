@@ -12,11 +12,18 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CFooter,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+import { cilLockLocked, cilUser, cibMinutemailer } from '@coreui/icons'
+import LoginModel from '../../../model/loginModel';
 
-const Login = () => {
+export default function Login() {
+  const model = new LoginModel();
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [error, setError] = React.useState();
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -30,9 +37,9 @@ const Login = () => {
                     <p className="text-medium-emphasis">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
-                        <CIcon icon={cilUser} />
+                        <CIcon icon={cibMinutemailer} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput placeholder="Email" autoComplete="email" onChange={(e) => setEmail(e.target.value)} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -42,11 +49,16 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
+                    <p style={{ color: "red" }} id="infoError">{error}</p>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton color="primary" className="px-4" onClick={async () => {
+                          const { error } = await model.signIn(email, password);
+                          setError(error);
+                        }}>
                           Login
                         </CButton>
                       </CCol>
@@ -64,8 +76,7 @@ const Login = () => {
                   <div>
                     <h2>Sign up</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
+                      
                     </p>
                     <Link to="/register">
                       <CButton color="primary" className="mt-3" active tabIndex={-1}>
@@ -82,5 +93,3 @@ const Login = () => {
     </div>
   )
 }
-
-export default Login

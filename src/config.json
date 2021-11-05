@@ -1,0 +1,4 @@
+{
+    "server": "http://localhost:4000/graphql",
+    "": "http://52.53.242.195:3000/graphql"
+}
