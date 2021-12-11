@@ -51,15 +51,15 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Dashboard" button={<Button
+      {/* <PageTitle title="Dashboard" button={<Button
       variant="contained"
       size="medium"
       color="secondary"
     >
         Latest Reports
-    </Button>} />
+    </Button>} /> */}
       <Grid container spacing={4}>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"
             upperTitle
@@ -421,7 +421,7 @@ export default function Dashboard(props) {
           >
             <Table data={mock.table} />
           </Widget>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

@@ -59,7 +59,6 @@ async function loginUser(dispatch, login, password, history, setIsLoading, setEr
   setIsLoading(true);
 
   if (!!login && !!password) {
-    console.log(API.signInAdmin)
     const { data } = await axios.post(config.server, {
       query: API.signInAdmin,
       variables: {
@@ -71,7 +70,6 @@ async function loginUser(dispatch, login, password, history, setIsLoading, setEr
         'Content-Type': 'application/json',
       },
     })
-    console.log(data)
     if (data.data && data.data.signInAdmin != null) {
       localStorage.setItem('authToken', data.data.signInAdmin.authToken)
       setError(null)

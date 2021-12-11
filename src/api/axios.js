@@ -9,6 +9,16 @@ const API = {
         signInAdmin(email: $email, password: $password){
         authToken
       }
+    }`,
+
+    getUsers: `query getUsers($limit: Float!, $skip: Float!,) {
+        getUsers(limit: $limit, skip: $skip){
+        id
+        birthDate
+        firstName
+        lastName
+        email
+      }
     }`
 }
 

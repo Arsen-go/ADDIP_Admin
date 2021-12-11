@@ -140,8 +140,8 @@ export default function Header(props) {
           Admin
         </Typography>
         <div className={classes.grow} />
-        <Button component={Link} href="https://flatlogic.com/templates/react-material-admin-full" variant={"outlined"} color={"secondary"} className={classes.purchaseBtn}>Unlock full version</Button>
-        <div
+        {/* <Button component={Link} href="https://flatlogic.com/templates/react-material-admin-full" variant={"outlined"} color={"secondary"} className={classes.purchaseBtn}>Unlock full version</Button> */}
+        {/* <div
           className={classNames(classes.search, {
             [classes.searchFocused]: isSearchOpen,
           })}
@@ -161,8 +161,8 @@ export default function Header(props) {
               input: classes.inputInput,
             }}
           />
-        </div>
-        <IconButton
+        </div> */}
+        {/* <IconButton
           color="inherit"
           aria-haspopup="true"
           aria-controls="mail-menu"
@@ -178,7 +178,7 @@ export default function Header(props) {
           >
             <NotificationsIcon classes={{ root: classes.headerIcon }} />
           </Badge>
-        </IconButton>
+        </IconButton> */}
         <IconButton
           color="inherit"
           aria-haspopup="true"
@@ -190,7 +190,7 @@ export default function Header(props) {
           className={classes.headerMenuButton}
         >
           <Badge
-            badgeContent={isMailsUnread ? messages.length : null}
+            badgeContent={isMailsUnread ? 0 : null}
             color="secondary"
           >
             <MailIcon classes={{ root: classes.headerIcon }} />
@@ -205,7 +205,7 @@ export default function Header(props) {
         >
           <AccountIcon classes={{ root: classes.headerIcon }} />
         </IconButton>
-        <Menu
+        {/* <Menu
           id="mail-menu"
           open={Boolean(mailMenu)}
           anchorEl={mailMenu}
@@ -277,7 +277,7 @@ export default function Header(props) {
               <Notification {...notification} typographyVariant="inherit" />
             </MenuItem>
           ))}
-        </Menu>
+        </Menu> */}
         <Menu
           id="profile-menu"
           open={Boolean(profileMenu)}
@@ -289,15 +289,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
-            </Typography>
-            <Typography
-              className={classes.profileMenuLink}
-              component="a"
-              color="primary"
-              href="https://flatlogic.com"
-            >
-              Flalogic.com
+              Arsen Matevosyan
             </Typography>
           </div>
           <MenuItem
@@ -308,14 +300,14 @@ export default function Header(props) {
           >
             <AccountIcon className={classes.profileMenuIcon} /> Profile
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             className={classNames(
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
           >
             <AccountIcon className={classes.profileMenuIcon} /> Tasks
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem
             className={classNames(
               classes.profileMenuItem,

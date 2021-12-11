@@ -2,7 +2,9 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
-
+import API from "../../api/axios";
+import axios from "axios";
+import config from "../../config.json";
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
@@ -11,24 +13,8 @@ import Table from "../dashboard/components/Table/Table";
 // data
 import mock from "../dashboard/mock";
 
-const datatableData = [
-  ["Joe James", "Example Inc.", "Yonkers", "NY"],
-  ["John Walsh", "Example Inc.", "Hartford", "CT"],
-  ["Bob Herm", "Example Inc.", "Tampa", "FL"],
-  ["James Houston", "Example Inc.", "Dallas", "TX"],
-  ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
-  ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
-  ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
-  ["Christian Birgitte", "Example Inc.", "Tampa", "FL"],
-  ["Meral Elias", "Example Inc.", "Hartford", "CT"],
-  ["Deep Pau", "Example Inc.", "Yonkers", "NY"],
-  ["Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
-  ["Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
-  ["Brigid Ankur", "Example Inc.", "Dallas", "TX"],
-  ["Anna Siranush", "Example Inc.", "Yonkers", "NY"],
-  ["Avram Sylva", "Example Inc.", "Hartford", "CT"],
-  ["Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
-  ["Gaston Festus", "Example Inc.", "Tampa", "FL"],
+let datatableData = [
+
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -37,27 +23,62 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+class Model {
+  constructor() {
+    this.authToken = localStorage.getItem("authToken");
+  }
+
+  async getUsers(limit, skip) {
+    const { data } = await axios.post(config.server, {
+      query: API.getUsers,
+      variables: {
+        limit: limit ? limit : 10,
+        skip: skip ? skip : 0,
+      }
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        "authToken": `Bearer ${this.authToken}`,
+      },
+    });
+    
+    if(data.data && data.data.getUsers.length) {
+      datatableData = [];
+      data.data.getUsers.forEach(user => {
+        let arr = [];
+        arr.push(user.firstName);
+        arr.push(user.lastName);
+        arr.push(user.birthDate);
+        arr.push(user.email);
+        datatableData.push(arr);
+      })
+    }
+  }
+}
+
 export default function Tables() {
   const classes = useStyles();
+  const model = new Model();
+  model.getUsers();
   return (
     <>
       <PageTitle title="Tables" />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <MUIDataTable
-            title="Employee List"
+            title="Users List"
             data={datatableData}
-            columns={["Name", "Company", "City", "State"]}
+            columns={["FirstName", "LastName", "BirthDate", "Email"]}
             options={{
               filterType: "checkbox",
             }}
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Widget title="Material-UI Table" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
             <Table data={mock.table} />
           </Widget>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
