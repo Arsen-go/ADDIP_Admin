@@ -36,10 +36,10 @@ import BigStat from "./components/BigStat/BigStat";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
-  { name: "Group A", value: 400, color: "primary" },
-  { name: "Group B", value: 300, color: "secondary" },
-  { name: "Group C", value: 300, color: "warning" },
-  { name: "Group D", value: 200, color: "success" },
+  { name: "MOG 17-20", value: 3678, color: "success" },
+  { name: "MOG 14-17", value: 14876, color: "secondary" },
+  { name: "MOG 10-14", value: 12220, color: "warning" },
+  { name: "MOG ...-10", value: 2206, color: "primary" },
 ];
 
 export default function Dashboard(props) {
@@ -59,9 +59,9 @@ export default function Dashboard(props) {
         Latest Reports
     </Button>} /> */}
       <Grid container spacing={4}>
-        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
-            title="Visits Today"
+            title="YSU Students"
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
@@ -70,7 +70,7 @@ export default function Dashboard(props) {
               <Grid container item alignItems={"center"}>
                 <Grid item xs={6}>
               <Typography size="xl" weight="medium" noWrap>
-                12, 678
+                32, 678
               </Typography>
                 </Grid>
                 <Grid item xs={6}>
@@ -96,6 +96,7 @@ export default function Dashboard(props) {
                 </Grid>
               </Grid>
             </div>
+            
             <Grid
               container
               direction="row"
@@ -104,21 +105,86 @@ export default function Dashboard(props) {
             >
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
-                  Registrations
+                  Registered
                 </Typography>
-                <Typography size="md">860</Typography>
+                <Typography size="md">1860</Typography>
               </Grid>
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
-                  Sign Out
+                  Other
                 </Typography>
-                <Typography size="md">32</Typography>
+                <Typography size="md">{32678-1860}</Typography>
               </Grid>
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
-                  Rate
+                  Percentage
                 </Typography>
-                <Typography size="md">3.25%</Typography>
+                <Typography size="md">26.876%</Typography>
+              </Grid>
+            </Grid>
+          </Widget>
+        </Grid>
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <Widget
+            title="YSU Workers"
+            upperTitle
+            bodyClass={classes.fullHeightBody}
+            className={classes.card}
+          >
+            <div className={classes.visitsNumberContainer}>
+              <Grid container item alignItems={"center"}>
+                <Grid item xs={6}>
+              <Typography size="xl" weight="medium" noWrap>
+                678
+              </Typography>
+                </Grid>
+                <Grid item xs={6}>
+              <LineChart
+                width={100}
+                height={30}
+                data={[
+                  { value: 19 },
+                  { value: 11 },
+                  { value: 22 },
+                  { value: 11 },
+                  { value: 8 },
+                ]}
+              >
+                <Line
+                  type="natural"
+                  dataKey="value"
+                  stroke={theme.palette.success.main}
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+                </Grid>
+              </Grid>
+            </div>
+            
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Grid item xs={4}>
+                <Typography color="text" colorBrightness="secondary" noWrap>
+                  Registered
+                </Typography>
+                <Typography size="md">362</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="text" colorBrightness="secondary" noWrap>
+                  Other
+                </Typography>
+                <Typography size="md">{678-362}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="text" colorBrightness="secondary" noWrap>
+                  Percentage
+                </Typography>
+                <Typography size="md">53.39%</Typography>
               </Grid>
             </Grid>
           </Widget>
@@ -138,7 +204,7 @@ export default function Dashboard(props) {
                   colorBrightness="secondary"
                   className={classes.legendElementText}
                 >
-                  Integration
+                  Students
                 </Typography>
               </div>
               <div className={classes.legendElement}>
@@ -148,7 +214,7 @@ export default function Dashboard(props) {
                   colorBrightness="secondary"
                   className={classes.legendElementText}
                 >
-                  SDK
+                  Workers
                 </Typography>
               </div>
             </div>
@@ -159,7 +225,7 @@ export default function Dashboard(props) {
                 colorBrightness="secondary"
                 className={classes.progressSectionTitle}
               >
-                Integration
+                Online students
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -175,7 +241,7 @@ export default function Dashboard(props) {
                 colorBrightness="secondary"
                 className={classes.progressSectionTitle}
               >
-                SDK
+                Online lecturers
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -186,89 +252,8 @@ export default function Dashboard(props) {
             </div>
           </Widget>
         </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
-          <Widget
-            title="Server Overview"
-            upperTitle
-            className={classes.card}
-            bodyClass={classes.fullHeightBody}
-          >
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="text"
-                colorBrightness="secondary"
-                className={classes.serverOverviewElementText}
-                noWrap
-              >
-                60% / 37°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.secondary.main}
-                      fill={theme.palette.secondary.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="text"
-                colorBrightness="secondary"
-                className={classes.serverOverviewElementText}
-                noWrap
-              >
-                54% / 31°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.primary.main}
-                      fill={theme.palette.primary.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="text"
-                colorBrightness="secondary"
-                className={classes.serverOverviewElementText}
-                noWrap
-              >
-                57% / 21°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.warning.main}
-                      fill={theme.palette.warning.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </Widget>
-        </Grid>
         <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
+          <Widget title="Students Grade" upperTitle className={classes.card}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <ResponsiveContainer width="100%" height={144}>
@@ -317,25 +302,19 @@ export default function Dashboard(props) {
                   color="text"
                   colorBrightness="secondary"
                 >
-                  Daily Line Chart
+                  Daily App Users
                 </Typography>
                 <div className={classes.mainChartHeaderLabels}>
                   <div className={classes.mainChartHeaderLabel}>
                     <Dot color="warning" />
                     <Typography className={classes.mainChartLegentElement}>
-                      Tablet
+                      Students
                     </Typography>
                   </div>
                   <div className={classes.mainChartHeaderLabel}>
                     <Dot color="primary" />
                     <Typography className={classes.mainChartLegentElement}>
-                      Mobile
-                    </Typography>
-                  </div>
-                  <div className={classes.mainChartHeaderLabel}>
-                    <Dot color="secondary" />
-                    <Typography className={classes.mainChartLegentElement}>
-                      Desktop
+                      Workers
                     </Typography>
                   </div>
                 </div>
@@ -407,12 +386,12 @@ export default function Dashboard(props) {
             </ResponsiveContainer>
           </Widget>
         </Grid>
-        {mock.bigStat.map(stat => (
+        {/* {mock.bigStat.map(stat => (
           <Grid item md={4} sm={6} xs={12} key={stat.product}>
             <BigStat {...stat} />
           </Grid>
-        ))}
-        <Grid item xs={12}>
+        ))} */}
+        {/* <Grid item xs={12}>
           <Widget
             title="Support Requests"
             upperTitle
