@@ -41,14 +41,18 @@ class Model {
         "authToken": `Bearer ${this.authToken}`,
       },
     });
-    
-    if(data.data && data.data.getUsers.length) {
+    console.log(this.authToken)
+
+    if (data.data && data.data.getUsers && data.data.getUsers.length) {
       datatableData = [];
       data.data.getUsers.forEach(user => {
         let arr = [];
         arr.push(user.firstName);
         arr.push(user.lastName);
-        arr.push(user.birthDate);
+
+        let newDate = new Date(user.birthDate);
+        let birthDate = newDate.getFullYear() + "-" + (newDate.getMonth() <= 9 ? "0" + (newDate.getMonth()+1) : newDate.getMonth()+1) + "-" + (newDate.getDate() <= 9 ? "0" + newDate.getDate() : newDate.getDate());
+        arr.push(birthDate);
         arr.push(user.email);
         datatableData.push(arr);
       })
